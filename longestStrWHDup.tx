@@ -1,0 +1,118 @@
+Longest Substring Without Duplication
+Write a function that takes in a string and that returns its longest 
+substring without duplicate characters. Assume that there will only be one longest substring
+without duplication.
+Sample input:"clementisacap"
+Sample output:"mentisac"
+
+main(string)
+let starterIdx = 0
+let idx = starterIdx
+let result = ""
+let hashMap = {}
+let subStr = ""
+
+ while(idx < string.length){
+  let letter = string[idx]
+  if(letter in hashMap){
+    let hashIdx = hashMap[letter]
+    if(hashIdx < idx){
+        if(hashIdx >= starterIdx){
+          starterIdx = hashMap[letter] + 1
+          hashMap[letter] = idx
+          idx = startIdx - 1
+          result = result.length > subStr.length ? result : subStr
+          subStr = ""
+        }else {
+          subStr += letter
+          hashMap[letter] = idx
+        }
+    }else {
+      subStr+= letter
+    }
+  }else {
+    subStr += letter
+    hashMap[letter] = idx
+  }
+ 
+  idx++
+ }
+ 
+ if(subStr.length >= result.length){
+  return subStr
+ }else {
+  return result
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ function longestSubstringWithoutDuplication(string) {
+    let starterIdx = 0
+    let idx = starterIdx
+    let result = ""
+    let subStr = ""
+    let hashMap = {}
+    
+    while(idx < string.length){
+    let letter = string[idx]
+    if(letter in hashMap){
+      let hashIdx = hashMap[letter]
+      if(hashIdx < idx){
+        if(hashIdx >= starterIdx){
+          starterIdx = hashMap[letter] + 1
+          hashMap[letter] = idx
+          idx = starterIdx - 1
+          result = result.length > subStr.length ? result : subStr
+          subStr = ""
+        }else {
+            hashMap[letter] = idx
+            subStr += letter
+        }
+        
+      }else {
+        subStr += letter
+      }
+    }else {
+      subStr += letter
+      hashMap[letter] = idx
+    }
+    
+    idx++
+    }
+    
+    if(subStr.length > result.length){
+      return subStr
+    }else {
+      return result
+    }
+    
+    
+}
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
