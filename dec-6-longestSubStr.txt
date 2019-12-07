@@ -13,13 +13,14 @@ function longestSubstringWithoutDuplication(string) {
     let letter = string[idx]
     if(letter in hashMap){
       let letterIdx = hashMap[letter]
-      if(letterIdx >= starterIdx){
+      if(letterIdx < idx && letterIdx >= starterIdx){
         starterIdx = letterIdx + 1
         hashMap[letter] = idx
         idx = letterIdx 
         result = result.length > currSubStr.length ? result : currSubStr
         currSubStr = ""
       }else {
+        hashMap[letter] = idx
         currSubStr+= letter
       }
     }else {
