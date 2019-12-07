@@ -1,0 +1,69 @@
+Write a function that takes in a string and that returns its longest substring without duplicate characters. Assume that there will only be one longest substring
+without duplication.
+Sample input:"clementisacap"
+Sample output:"mentisac"
+
+function longestSubstringWithoutDuplication(string) {
+  let hashMap = {}
+  let starterIdx = 0
+  let idx = starterIdx
+  let result = ""
+  let currSubStr = ""
+  while(idx < string.length){
+    let letter = string[idx]
+    if(letter in hashMap){
+      let letterIdx = hashMap[letter]
+      if(letterIdx >= starterIdx){
+        starterIdx = letterIdx + 1
+        hashMap[letter] = idx
+        idx = letterIdx 
+        result = result.length > currSubStr.length ? result : currSubStr
+        currSubStr = ""
+      }else {
+        currSubStr+= letter
+      }
+    }else {
+      hashMap[letter] = idx
+      currSubStr += letter
+    }
+  
+  idx++
+  }
+  
+  return currSubStr.length > result.length ? currSubStr : result
+}
+
+
+
+
+
+
+main(string)
+let starterIdx = 0 // StartIdx of no duplicated chars
+let idx = starterIdx
+let hashMap = {} // Key will be chars and values will be the index of the last char
+let longestStr = ""
+let currSubStr = ""
+loop through string
+  while(idx < string.length){
+    let letter = string[idx]
+    if(letter in hashMap){
+    let letterIdx = hashMap[letter]
+      if(letterIdx >= starterIdx){
+        starterIdx = letterIdx + 1
+        hashMap[letter] = idx
+        idx = starterIdx - 1
+        result = result.length > currSubStr.length ? result : currSubStr
+        currSubStr = ""
+      }else {
+        hashMap[letter] = idx
+        currSubStr += letter
+      }
+    }else {
+      hashMap[letter] = idx
+      currSubStr += letter
+    }
+    idx++
+  }
+  
+  return currSubStr.length > result.length ? currSubStr : result
