@@ -1,0 +1,64 @@
+Write a function that takes in a string and that returns its longest substring without duplicate characters.
+Assume that there will only be one longest substring
+without duplication.
+Sample input:"clementisacap"
+Sample output:"mentisac"
+
+
+function longestSubStringWithNoDup(string){
+  let hashMap = {}
+  let result = ""
+  let idx = 0 
+  let startIdx = 0
+  let subStr = ""
+  while(idx < string.length){
+    let letter = string[idx]
+    if(letter in hashMap && hashMap[letter] >= startIdx && hashMap[letter] < idx){
+      startIdx = hashMap[letter] + 1 
+      hashMap[letter] = idx
+      idx = startIdx - 1
+      result = result.length > subStr.length ? result : subStr
+      subStr = ""
+    }else {
+      subStr+= letter
+      hashMap[letter] = idx
+    }
+    idx++
+  }
+  return subStr.length > result.length ? subStr : result
+}
+
+
+
+
+
+Main(string)
+
+let hashMap = {
+}
+let result = ""
+let idx = 0
+let startIdx = 0
+let subStr = ""
+while(idx < string.length){
+  let letter = string[idx]
+  if(letter in hashMap){
+    let letterIdx = hashMap[letter]
+    if(letterIdx >= startIdx && letterIdx < idx){
+      let startIdx = hashMap[letter] + 1 
+      hashMap[letter] = idx
+      idx = startIdx - 1
+      result = result.length > subStr.length ? result : subStr
+      subStr = ""
+    }else {
+      hashMap[letter] = idx
+      subStr += letter
+    }
+  }else {
+    subStr += letter
+    hashMap[letter] = idx
+  }
+  idx++
+}
+
+return subStr.length > result.length ? subStr : result
